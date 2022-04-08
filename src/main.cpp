@@ -1,29 +1,27 @@
 /**
- * @file streams-generator-i2s.ino
- * @author Phil Schatzmann
+ * A tiny synth
+ * based on code by Phil Schatzmann
  * @brief see https://github.com/pschatzmann/arduino-audio-tools/blob/main/examples/examples-stream/streams-generator-i2s/README.md 
  * @copyright GPLv3
  */
 
- 
 #include "AudioTools.h"
 #include "Midi.h"
 #include "StkAll.h"
 
 MidiCallbackAction action;
-// AppleMidiServer in(&action);
-MidiBleServer ble("MidiServer", &action);
+MidiBleServer ble("TinySynth", &action);
 
-uint16_t sample_rate=16000;
-uint8_t channels = 2;
+uint16_t sample_rate=44100;
+uint8_t channels = 1;
 Voicer voicer;
-Clarinet clarinet1;
-Clarinet clarinet2;
-Clarinet clarinet3;
-Clarinet clarinet4;
+Clarinet voice1;
+Clarinet voice2;
+Clarinet voice3;
+Clarinet voice4;
 I2SStream i2s;
-ArdStreamOut out(i2s, 1);
-MusicalNotes musicalnotes;
+ArdStreamOut out(i2s, channels);
+MusicalNotes notes;
 
 void onNoteOn(uint8_t channel, uint8_t note, uint8_t velocity) {
     StkFloat noteNumber = static_cast<StkFloat>(note);
@@ -36,15 +34,6 @@ void onNoteOff(uint8_t channel, uint8_t note, uint8_t velocity) {
   StkFloat amplitude = 0.5; // My MIDI controller doesn't send Note Off velocity.
   voicer.noteOff(noteNumber, amplitude);
 }
-
-// void processMidi(void *pvParameter) {
-//   while (true) {
-//     if (!in.loop()){
-//       delay(10);
-//     }
-//   }
-// }
-
 
 void setup(void) {  
   // Open Serial 
@@ -65,14 +54,10 @@ void setup(void) {
   config.bits_per_sample = 16;
   i2s.begin(config);
 
-  voicer.addInstrument(&clarinet1);
-  voicer.addInstrument(&clarinet2);
-  voicer.addInstrument(&clarinet3);
-  voicer.addInstrument(&clarinet4);
-
-
-  // in.begin();
-  // xTaskCreate(&processMidi, "processMidi", 4096, NULL, 0, NULL);
+  voicer.addInstrument(&voice1);
+  voicer.addInstrument(&voice2);
+  voicer.addInstrument(&voice3);
+  voicer.addInstrument(&voice4);
 }
 
 void loop() {
