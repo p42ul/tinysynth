@@ -2,7 +2,7 @@
 ## a tiny little synthesizer
 
 
-Tinysynth is a synthesizer that uses the ESP32 as its audio processor.
+Tinysynth is a synthesizer that uses the [TinyPico](https://www.tinypico.com/) as its audio processor.
 
 It uses the fantastic [Arduino Audio Tools](https://github.com/pschatzmann/arduino-audio-tools) and [Arduino STK](https://github.com/pschatzmann/Arduino-STK) libraries written by Phil Schatzmann.
 
