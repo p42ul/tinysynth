@@ -9,3 +9,5 @@ It uses the fantastic [Arduino Audio Tools](https://github.com/pschatzmann/ardui
 In my prototype, I built it on a breadboard with a [UDA1334A Breakout Board](https://www.adafruit.com/product/3678) from Adafruit.
 
 ![the prototype built on a breadboard](./images/board.jpg)
+
+Check out [the wiki](https://github.com/p42ul/tinysynth/wiki) for more info!
